@@ -16,30 +16,7 @@ The goal of this self driving car path planner project is to drive collision fre
 
 6.	Sensor Fusion Data, a list of all other car's attributes on the same side of the road.   A 2d vector of cars and then that car's [car's unique ID, car's x position in map coordinates, car's y position in map coordinates, car's x velocity in m/s, car's y velocity in m/s, car's s position in frenet coordinates, car's d position in frenet coordinates.  
 Look for the cars in the same lane as the car.  If it is the same lane check the speed of the car in the lane and the s distance of the car from the car.  Determine where the car will be in the future, using the in 20 ms time interval during points, the number of previous points size and the speed of the car.
-		for (int i = 0; i < sensor_fusion.size(); i++)
-		{
-			// car is in lane
-			d = sensor_fusion[i][6];
-			if (d < (2 + 4 * lane + 2) && d >(2 + 4 * lane - 2))
-			{// d value tells if the car is in our lane check speed
-				double vx = sensor_fusion[i][3];
-				double vy = sensor_fusion[i][4];
-				double check_speed = sqrt(vx*vx + vy*vy);
-				// check car's s value
-				double check_car_s = sensor_fusion[i][5];
-				// where the car will be s in the future
-				check_car_s += ((double)prev_size*0.02*check_speed);
-				//are we close to car in front of us,
-				// check_car_s less than 30m
-				if ((check_car_s > car_s) && ((check_car_s - car_s) < 30))
-				{
-					too_close = true;
-					if (lane > 0)
-					lane = 0; // get in the left lane
-				}
-			}
-		}
-
+		
 7.	If the car is too close to the car in front of it, reduce the velocity by 0.224 every 20 ms.
 
 8.	If the speed is under 49.5 increase the velocity by 0.224 every 20 ms.
@@ -48,6 +25,9 @@ Look for the cars in the same lane as the car.  If it is the same lane check the
 
 10.	The previous size is assigned to an integer value.  On start up of the simulator the previous size will be zero, less than two.  In this case assign the car x ,y and previous car x, y values to the anchor ptsx[0], ptsy[0], ptsx[1] and ptsy[1].
 
+11.  The next previous size path will be larger than 2 so ptsx[0], ptsy[0], ptsx[1] and ptsy[1] will be defined by previous path points.
+
+12.  The ptsx, ptsy vectors are updated and sent to the simulator as the next x, next y values.  The feedback from the simulator and the code allows the car to driving around the track without collisions, changing lanes, for over 4.32 miles.
 
 In completing this project, I learned that additional waypoints allow the car to not stop at 4.17 miles as it does without extending the waypoints.  Using the ‘cout’ function adds latency and may get collisions.  I verified that the car_s provided by the simulator matches a getFrenet function that takes in the car_x, car_y, theta, (yaw value from simulator), map_waypoints_x and map_waypoints_y.  
 
