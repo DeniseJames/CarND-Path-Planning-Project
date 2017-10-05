@@ -1,7 +1,7 @@
 #define _USE_MATH_DEFINES  // to use M_PI constant
 #include <fstream>
 #include <cmath>
-#include <uWS\uWS.h>
+#include <uWS/uWS.h>
 #include <chrono>
 #include <iostream>
 #include <thread>
