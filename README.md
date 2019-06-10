@@ -1,6 +1,6 @@
 # CarND Path Planner Project
 
-##  Hardware specifications:  HP 8G Ram, 2G Video Ram, Windows 10 Home Edition
+
 
 The goal of this self driving car path planner project is to drive collision free in the Unity Udacity simulator, under 50 miles per hour, stay with the traffic, change lanes when the car in front of the car in the right lane is going too slow, for at least 4.32 miles.  This was completed with the challenge of adding waypoints to the file provided.  Collisions were avoided by sensing cars in front in the car’s lane and the speed of the preceding car.  If the vehicle is too close to the preceding car, decelerate at 5 mph each 20 ms.  If not too close and the velocity is less than 50 miles per hour, accelerate at 5 mph each 20 ms.  Below is are details of the algorithm and code for this path planning project.
 
